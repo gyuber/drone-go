@@ -161,14 +161,9 @@ type (
 
 	// Secret represents a secret variable, such as a password or token.
 	Secret struct {
-		Name            string `json:"name,omitempty"`
-		Data            string `json:"data,omitempty"`
-		PullRequest     bool   `json:"pull_request,omitempty"`
-		PullRequestPush bool   `json:"pull_request_push,omitempty"`
-
-		// Deprecated.
-		Pull bool `json:"pull,omitempty"`
-		Fork bool `json:"fork,omitempty"`
+		Name  string   `json:"name,omitempty"`
+		Value string   `json:"value,omitempty"`
+		Event []string `json:"event,omitempty"`
 	}
 
 	// Server represents a server node.
