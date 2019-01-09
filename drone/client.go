@@ -377,6 +377,44 @@ func (c *client) SecretDelete(owner, name, secret string) error {
 	return c.delete(uri)
 }
 
+// Registry returns a secret by name.
+func (c *client) Registry(owner, name, registry string) (*Registry, error) {
+	out := new(Registry)
+	uri := fmt.Sprintf(pathRepoRegistry, c.addr, owner, name, registry)
+	err := c.get(uri, out)
+	return out, err
+}
+
+// RegistryList returns a list of all repository Registrys.
+func (c *client) RegistryList(owner string, name string) ([]*Registry, error) {
+	var out []*Registry
+	uri := fmt.Sprintf(pathRepoRegistries, c.addr, owner, name)
+	err := c.get(uri, &out)
+	return out, err
+}
+
+// RegistryCreate creates a registry.
+func (c *client) RegistryCreate(owner, name string, in *Registry) (*Registry, error) {
+	out := new(Registry)
+	uri := fmt.Sprintf(pathRepoRegistries, c.addr, owner, name)
+	err := c.post(uri, in, out)
+	return out, err
+}
+
+// RegistryUpdate updates a registry.
+func (c *client) RegistryUpdate(owner, name string, in *Registry) (*Registry, error) {
+	out := new(Registry)
+	uri := fmt.Sprintf(pathRepoRegistries, c.addr, owner, name, in.Address)
+	err := c.patch(uri, in, out)
+	return out, err
+}
+
+// RegistryDelete deletes a registry.
+func (c *client) RegistryDelete(owner, name, registry string) error {
+	uri := fmt.Sprintf(pathRepoRegistry, c.addr, owner, name, registry)
+	return c.delete(uri)
+}
+
 // Cron returns a cronjob by name.
 func (c *client) Cron(owner, name, cron string) (*Cron, error) {
 	out := new(Cron)

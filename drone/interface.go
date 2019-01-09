@@ -126,6 +126,21 @@ type Client interface {
 	// SecretDelete deletes a secret.
 	SecretDelete(owner, name, secret string) error
 
+	// Registry returns a registry by name.
+	Registry(owner, name, registry string) (*Registry, error)
+
+	// Registry returns a list of all repository secrets.
+	RegistryList(owner, name string) ([]*Registry, error)
+
+	// RegistryCreate creates a registry.
+	RegistryCreate(owner, name string, secret *Registry) (*Registry, error)
+
+	// RegistryUpdate updates a registry.
+	RegistryUpdate(owner, name string, secret *Registry) (*Registry, error)
+
+	// RegistryDelete deletes a secret.
+	RegistryDelete(owner, name, secret string) error
+
 	// Cron returns a cronjob by name.
 	Cron(owner, name, cron string) (*Cron, error)
 
