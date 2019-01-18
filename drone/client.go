@@ -169,8 +169,10 @@ func (c *client) RepoList() ([]*Repo, error) {
 // the user has explicit access in the host system.
 func (c *client) RepoListSync() ([]*Repo, error) {
 	var out []*Repo
-	uri := fmt.Sprintf(pathRepos, c.addr)
-	err := c.post(uri, nil, &out)
+	//uri := fmt.Sprintf(pathRepos, c.addr)
+	//err := c.post(uri, nil, &out)
+	uri := fmt.Sprintf((pathRepos + "?all=true&flush=true"), c.addr)
+	err := c.get(uri, &out)
 	return out, err
 }
 
